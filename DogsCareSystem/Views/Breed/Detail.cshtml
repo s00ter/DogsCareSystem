@@ -1,0 +1,39 @@
+@model Breed;
+
+<div class="container">
+    
+    <h1 class="my-4">
+        <small>Подробнее о породе</small>
+    </h1>
+
+    <div class="row">
+  
+        @if (Model.Image == null)
+          {
+              
+              <img class="img-fluid" src="Нет_изображения.png" alt="">
+              
+          }
+          else
+          {
+              <div class="col-md-8">
+                  <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" alt="">
+              </div>
+          }
+  
+        <div class="col-md-4">
+            <h3 class="my-3">@Model.Name</h3>
+            <p>@Model.About</p>
+            <h3 class="my-3">Особенности</h3>
+            <ul>
+                <h4 class="my-3">Страна</h4>
+                <li>@Model.Country</li>
+                <h4 class="my-3">Размер</h4>
+                <li>@Model.Size</li>
+                <h4 class="my-3">Продолжительность жизни</h4>
+                <li>@Model.AvgLifeTime</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /.container -->

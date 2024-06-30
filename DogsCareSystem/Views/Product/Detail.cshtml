@@ -1,0 +1,70 @@
+@model Product;
+
+<style>
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+<div class="container">
+    
+    <h1 class="my-4">
+        <small>Подробнее о товаре</small>
+    </h1>
+
+    <div class="row">
+  
+        @if (Model.Image == null)
+        {
+            <img class="img-fluid" src="Нет_изображения.png" alt="">
+        }
+        else
+        {
+            <div class="col-md-8">
+                <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" alt="">
+            </div>
+        }
+  
+        <div class="col-md-4">
+            <h4 class="my-3">Имя</h4>
+            <h3 class="my-3">@Model.Name</h3>
+            <ul>
+                <h4 class="my-3">Описание</h4>
+                <li>@Model.Description</li>
+                <h4 class="my-3">Цена</h4>
+                <li>@Model.Cost</li>
+            </ul>
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a type="button" class="btn btn-primary" asp-area="" asp-route-id="@Model.ProductId" asp-controller="Review" asp-action="Create">Добавить отзыв</a>
+    }
+    @foreach (var item in Model.Reviews)
+    {
+        <div class="row align-items-md-stretch">
+        
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                    <h4>@item.AppUserId</h4>
+                    <small class="text-body-secondary">Рейтинг: @item.Rating</small>
+                    <p>Комментарий: @item.Comment</p>
+                    <small class="text-body-secondary">Созданно: @item.CreatedAt</small>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

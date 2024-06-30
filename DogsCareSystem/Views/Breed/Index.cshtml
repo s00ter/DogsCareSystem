@@ -1,0 +1,49 @@
+@model List<Breed>
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    
+    <form asp-controller="Breed" asp-action="Search">
+        <p>
+            <input type="text" name="str" />
+            <input type="submit" value="Поиск" />
+        </p>
+    </form>
+                       
+    <div class="row">
+      @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+      {
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Breed" asp-action="Parse">Парсинг</a>
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Breed" asp-action="Create">Добавить</a>
+      }
+      @foreach (var item in Model)
+      {
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            @if (item.Image == null)
+            {
+              <img class="card-img-top" src="Нет_изображения.png" width="100%" height="225" alt="Card image cap">
+            }
+            else
+            {
+              <img class="card-img-top" src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="100%" height="225" alt="Card image cap">
+            }
+            <div class="card-body">
+              <p class="card-text">@item.Name</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a asp-controller="Breed" asp-action="Detail" asp-route-id="@item.BreedId" type="btn btn-success" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                  @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                  {
+                    <a asp-controller="Breed" asp-action="Delete" asp-route-id="@item.BreedId" type="btn btn-success" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                  }
+                </div>
+                <small class="text-muted">@item.Size</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  </div>

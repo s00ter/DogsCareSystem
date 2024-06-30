@@ -1,0 +1,55 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model DogsCareSystem.Models.Dto.CreateReviewDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+ <div class="navbar-container">
+    </div>
+    <div class="main-container">
+      <section class="space-sm">
+        <div class="container">
+          <div class="row mb-5">
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <div class="row flex-md-row card card-md">
+            <div class="card-body bg-secondary">
+              <div class="text-center mb-5">
+                <h1 class="h2 mb-2">Данные о товаре</h1>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-6 col-lg-5">
+                  <form method="post" asp-action="Create" enctype="multipart/form-data">
+                    
+                    <div class="form-row form-group">
+                      <div class="col">
+                        <input asp-for="Comment" class="form-control form-control-lg" placeholder="Комментарий"/>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                      </div>
+                      </div>
+                      
+                      <div class="form-row form-group">
+                        <div class="col">
+                          <input asp-for="Rating" class="form-control form-control-lg" placeholder="Рейтинг"/>
+                          <span asp-validation-for="Rating" class="text-danger"></span>
+                        </div>
+                      </div>
+
+                    <div class="form-row form-group">
+                      <div class="col">
+                        <button class="btn btn-block btn-success btn-lg" type="submit">Создать</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of container-->
+      </section>
+      <!--end of section-->
+    </div>

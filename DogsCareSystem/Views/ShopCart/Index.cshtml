@@ -1,0 +1,14 @@
+@model DogsCareSystem.Models.Dto.ShopCartDto
+
+<div class="container">
+    @foreach (var el in Model.ShopCartRepository.ListShopItems)
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Продукт</b> @el.Product.Name <br />
+            <b>Цена, руб</b> @el.Product.Cost.ToString()
+            <a asp-controller="ShopCart" asp-action="Delete" asp-route-id="@el.Id" type="btn btn-success" class="btn btn-sm btn-outline-secondary">Удалить</a>
+        </div>
+    }
+    <hr />
+    <a class="btn btn-danger" asp-controller="ShopCart" asp-action="Complete">Оплатить</a>
+</div>

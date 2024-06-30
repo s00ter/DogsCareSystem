@@ -1,0 +1,47 @@
+@model Dog;
+
+<div class="container">
+    
+    <h1 class="my-4">
+        <small>Подробнее о питомце</small>
+    </h1>
+
+    <div class="row">
+  
+        @if (Model.Image == null)
+          {
+              <img class="img-fluid" src="Нет_изображения.png" alt="">
+          }
+          else
+          {
+              <div class="col-md-8">
+                  <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" alt="">
+              </div>
+          }
+        
+        <div class="col-md-4">
+            <h4 class="my-3">Имя</h4>
+            <h3 class="my-3">@Model.Name</h3>
+            <ul>
+                <h4 class="my-3">Вес, кг </h4>
+                <li>@Model.Weight</li>
+                <h4 class="my-3">Пол</h4>
+                <li>@Model.Gender</li>
+                <h4 class="my-3">Возраст, лет</h4>
+                <li>@Model.Age</li>
+                <h4 class="my-3">Телефон владельца</h4>
+                <li>@Model.AppUser?.PhoneNumber</li>
+                @if (Model.Breed != null)
+                {
+                    <h4 class="my-3">Порода</h4>
+                    <li>@Model.Breed.Name</li>
+                }
+                @if (Model.Kennel != null)
+                {
+                    <h4 class="my-3">Отделение</h4>
+                    <li>@Model.Kennel.Name</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
